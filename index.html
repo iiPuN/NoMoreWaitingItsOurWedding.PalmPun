@@ -82,6 +82,20 @@ body.rsvp-modal-open{overflow:hidden}
 @keyframes rsvpStarBigPop{0%{opacity:0;transform:translateY(110px) scale(.12) rotate(-24deg)}50%{opacity:1;transform:translateY(-24px) scale(1.28) rotate(8deg)}72%{transform:translateY(9px) scale(.91) rotate(-4deg)}88%{transform:translateY(-9px) scale(1.1) rotate(3deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
 @keyframes rsvpSparkBurst{0%{opacity:.15;transform:scale(.4) rotate(-25deg)}55%{opacity:1;transform:scale(1.3) rotate(12deg)}100%{opacity:.65;transform:scale(.87) rotate(35deg)}}
 @media(prefers-reduced-motion:reduce){.rsvp-success-star,.rsvp-success-card,.rsvp-success-spark{animation:none!important;opacity:1!important;transform:none!important}}
+
+/* V6.2: consistent RSVP confirmation on desktop, tablet, and mobile */
+.rsvp-success-message span{display:block;}
+.rsvp-success-message span+span{margin-top:7px;}
+.rsvp-success:not([hidden]){display:grid!important;position:fixed!important;inset:0!important;z-index:2147483640!important;visibility:visible!important;opacity:1!important;}
+.rsvp-success:not([hidden]) .rsvp-success-card{opacity:1;visibility:visible;}
+.rsvp-success:not([hidden]) .rsvp-success-star{display:block;opacity:1;visibility:visible;}
+@media (prefers-reduced-motion: no-preference){
+.rsvp-success[data-celebrate="true"] .rsvp-success-star{animation:rsvpStarBigPop 1.25s cubic-bezier(.18,.78,.22,1) both!important;}
+.rsvp-success[data-celebrate="true"] .rsvp-success-card{animation:rsvpCardPop .45s ease-out both!important;}
+}
+@media (prefers-reduced-motion: reduce){
+.rsvp-success-star,.rsvp-success-card{animation:none!important;transform:none!important;opacity:1!important;}
+}
 </style></head><body><a class="skip" href="#details">Skip invitation</a>
 <section class="hero" id="home"><div class="walk-zone" aria-hidden="true"><img class="walking-stars" id="walkingStars" src="assets/run-0.png" alt=""></div><div class="cloud one"></div><div class="cloud two"></div><span class="floating-star a"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><span class="floating-star b"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><g stroke="#910c2d" stroke-width="3" stroke-linecap="round"><path d="M24 2V14 M24 34V46 M2 24H14 M34 24H46 M8 8L16 16 M32 32L40 40 M40 8L32 16 M16 32L8 40"/></g><circle cx="24" cy="24" r="5" fill="#910c2d"/></svg></span><span class="floating-star c"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><div class="hero-inner"><div class="mini">A LITTLE LOVE, A LOT OF FUN</div><img class="hero-card" tabindex="0" src="assets/invitation.jpg" alt="Official Palm and Pun wedding invitation for 28 November 2026 at Milestone Studio" fetchpriority="high"><a class="pill" href="#details">OPEN INVITATION ↓</a><span class="hint">Scroll down to discover our wedding day</span></div></section>
 <audio id="weddingMusic" preload="none" loop src="assets/wedding-violin.mp3"></audio><button id="musicButton" class="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">♫ PLAY MUSIC</button><nav aria-label="Wedding page navigation"><a href="#home">HOME</a><a href="#timeline">OUR DAY</a><a href="#dress">DRESS</a><a href="#location">MAP</a><a href="#rsvp">RSVP</a></nav>
@@ -95,7 +109,7 @@ body.rsvp-modal-open{overflow:hidden}
     <span class="rsvp-success-spark left" aria-hidden="true">✦</span><span class="rsvp-success-spark right" aria-hidden="true">✧</span>
     <img class="rsvp-success-star" src="assets/dress-star.png" alt="Palm &amp; Pun wedding star">
     <h2 class="rsvp-success-title" id="rsvpSuccessTitle">THANK YOU! ♡</h2>
-    <p class="rsvp-success-message" id="rsvpSuccessMessage">Your RSVP has been received.</p>
+    <p class="rsvp-success-message" id="rsvpSuccessMessage"><span>Your RSVP has been received.</span><span>We can't wait to celebrate with you!</span></p>
     <p class="rsvp-success-name" id="rsvpSuccessName"></p>
     <button type="button" class="rsvp-success-close" id="rsvpSuccessClose">BACK TO INVITATION ↑</button>
   </div>
@@ -115,9 +129,15 @@ let lastRsvpFocus=null;
 function showRsvpSuccess(name,isComing){
   lastRsvpFocus=document.activeElement;
   rsvpSuccessTitle.textContent = "THANK YOU! ♡";
-  rsvpSuccessMessage.textContent=isComing ? "Your RSVP has been received. We can't wait to celebrate with you!" : "Your RSVP has been received. We'll miss you at the party!";
+  rsvpSuccessMessage.replaceChildren();
+  const lineOne=document.createElement("span");
+  const lineTwo=document.createElement("span");
+  lineOne.textContent="Your RSVP has been received.";
+  lineTwo.textContent=isComing ? "We can't wait to celebrate with you!" : "We'll miss you at the party!";
+  rsvpSuccessMessage.append(lineOne,lineTwo);
   rsvpSuccessName.textContent=name ? 'Thank you, '+name+'! ♡' : '';
   rsvpSuccessModal.hidden=false;
+  rsvpSuccessModal.style.display="grid";
   rsvpSuccessModal.removeAttribute('data-celebrate');
   void rsvpSuccessModal.offsetWidth;
   rsvpSuccessModal.setAttribute('data-celebrate','true');
@@ -126,6 +146,7 @@ function showRsvpSuccess(name,isComing){
 }
 function closeRsvpSuccess(){
   rsvpSuccessModal.hidden=true;
+  rsvpSuccessModal.style.removeProperty("display");
   rsvpSuccessModal.removeAttribute('data-celebrate');
   document.body.classList.remove('rsvp-modal-open');
   if(lastRsvpFocus && lastRsvpFocus.isConnected)lastRsvpFocus.focus();
