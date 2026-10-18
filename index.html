@@ -50,6 +50,25 @@ html{scroll-snap-type:y proximity;scroll-padding-top:0}
 @keyframes closingStarFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-13px) rotate(2deg)}}
 @keyframes closingStarWave{0%,100%{transform:translateY(0) rotate(-3deg)}35%{transform:translateY(-10px) rotate(4deg)}70%{transform:translateY(-5px) rotate(-1deg)}}
 @media(prefers-reduced-motion:reduce){.closing img,.closing img:hover{animation:none!important;transform:none!important}}
+
+/* RSVP confirmation — visible only after a verified success response. */
+.rsvp-success[hidden]{display:none!important}
+.rsvp-success{position:fixed;inset:0;z-index:250;display:grid;place-items:center;padding:20px;background:rgba(29,16,26,.68);backdrop-filter:blur(7px);overflow-y:auto}
+.rsvp-success-card{position:relative;width:min(100%,420px);max-height:calc(100dvh - 40px);overflow-y:auto;border:3px solid #fff4e7;background:#910c2d;color:#fffaf6;border-radius:28px;padding:26px 22px 30px;text-align:center;box-shadow:0 22px 65px #1c071951;animation:rsvpCardPop .5s cubic-bezier(.17,.89,.32,1.25) both}
+.rsvp-success-spark{position:absolute;color:#a7d4ed;font-size:27px;pointer-events:none;animation:rsvpSparkle 1.4s ease-in-out infinite alternate}
+.rsvp-success-spark.left{left:13%;top:16%}.rsvp-success-spark.right{right:13%;top:28%;animation-delay:.35s}
+.rsvp-success-star{display:block;width:min(52%,190px);height:auto;max-height:190px;object-fit:contain;margin:0 auto 12px;filter:drop-shadow(0 8px 16px #200d2655);animation:rsvpStarBounce .95s cubic-bezier(.22,.68,.26,1.16) both}
+.rsvp-success-title{font-size:clamp(22px,5.5vw,30px);line-height:1.18;color:#b1d9ee;margin:5px 0 12px;font-weight:900}
+.rsvp-success-message{font-size:16px;line-height:1.5;margin:0 0 9px}
+.rsvp-success-name{font-size:14px;opacity:.9;margin:0 0 16px;overflow-wrap:anywhere}
+.rsvp-success-close{border:0;background:#fffaf6;color:#910c2d;border-radius:30px;padding:13px 20px;min-height:46px;font-weight:900;cursor:pointer}
+.rsvp-success-close:focus-visible{outline:3px solid #a7d4ed;outline-offset:3px}
+body.rsvp-modal-open{overflow:hidden}
+@keyframes rsvpStarBounce{0%{opacity:0;transform:translateY(70px) scale(.4) rotate(-18deg)}55%{opacity:1;transform:translateY(-13px) scale(1.12) rotate(7deg)}80%{transform:translateY(5px) scale(.96) rotate(-2deg)}100%{transform:translateY(0) scale(1) rotate(0)}}
+@keyframes rsvpCardPop{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes rsvpSparkle{to{opacity:.35;transform:scale(.68) rotate(20deg)}}
+@media (prefers-reduced-motion:reduce){.rsvp-success-card,.rsvp-success-star,.rsvp-success-spark{animation:none!important}}
+
 </style></head><body><a class="skip" href="#details">Skip invitation</a>
 <section class="hero" id="home"><div class="walk-zone" aria-hidden="true"><img class="walking-stars" id="walkingStars" src="assets/run-0.png" alt=""></div><div class="cloud one"></div><div class="cloud two"></div><span class="floating-star a"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><span class="floating-star b"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><g stroke="#910c2d" stroke-width="3" stroke-linecap="round"><path d="M24 2V14 M24 34V46 M2 24H14 M34 24H46 M8 8L16 16 M32 32L40 40 M40 8L32 16 M16 32L8 40"/></g><circle cx="24" cy="24" r="5" fill="#910c2d"/></svg></span><span class="floating-star c"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><div class="hero-inner"><div class="mini">A LITTLE LOVE, A LOT OF FUN</div><img class="hero-card" tabindex="0" src="assets/invitation.jpg" alt="Official Palm and Pun wedding invitation for 28 November 2026 at Milestone Studio" fetchpriority="high"><a class="pill" href="#details">OPEN INVITATION ↓</a><span class="hint">Scroll down to discover our wedding day</span></div></section>
 <audio id="weddingMusic" preload="none" loop src="assets/wedding-violin.mp3"></audio><button id="musicButton" class="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">♫ PLAY MUSIC</button><nav aria-label="Wedding page navigation"><a href="#home">HOME</a><a href="#timeline">OUR DAY</a><a href="#dress">DRESS</a><a href="#location">MAP</a><a href="#rsvp">RSVP</a></nav>
@@ -58,12 +77,49 @@ html{scroll-snap-type:y proximity;scroll-padding-top:0}
 <section class="section dress" id="dress"><div class="wrap fade"><span class="eyebrow">A LITTLE NOTE</span><h2 class="title">DRESS HAPPY!</h2><img class="star-img" src="assets/dress-star.png" alt="Blue star with Palm and Pun red wedding monogram" loading="lazy"><div class="statement">COME AS YOU ARE</div><p class="sub">No dress code, just dress happy.<br>Wear whatever makes you feel like celebrating!</p><p class="dress-remark">A little note: Thinking of wearing all white?<br>Add a splash of color for us today! ♡</p></div></section>
 <section class="section venue" id="location"><div class="wrap fade"><span class="eyebrow">COME FIND US</span><h2 class="title">LOCATION</h2><div class="venue-card"><span aria-hidden="true" style="font-size:40px">✦</span><p class="sub">Here’s where we’ll celebrate together!</p><div class="venue-map"><iframe title="Palm and Pun wedding location preview" src="https://www.google.com/maps/d/embed?mid=1dzSoQIOZci9iMy1yUvM7Icn-HaUbPF4&amp;ll=13.849767444457344%2C100.62674579999998&amp;z=17" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><p class="venue-map-note">Explore the map below, or tap the button for directions.</p><a class="pill" href="https://www.google.com/maps/d/edit?hl=en&amp;mid=1dzSoQIOZci9iMy1yUvM7Icn-HaUbPF4&amp;ll=13.849767444457344%2C100.62674579999998&amp;z=18" target="_blank" rel="noopener noreferrer">OPEN WEDDING MAP ↗</a></div></div></section>
 <section class="section rsvp" id="rsvp"><div class="wrap fade"><span class="eyebrow">WE'D LOVE TO SEE YOU</span><h2 class="title">WILL YOU JOIN US?</h2><p class="sub">Let us know you'll be there!</p><div class="rsvp-box"><form id="rsvpForm"><label for="guest">YOUR NAME</label><p class="field-hint">Tell us the name we know you by ♡</p><input id="guest" name="guest" placeholder="The name we call you" required autocomplete="name" maxlength="100"><label for="attendance">WILL YOU BE THERE?</label><select id="attendance" name="attendance" required><option value="yes">YES, I’LL BE THERE! ♡</option><option value="no">SORRY, I CAN’T MAKE IT</option></select><div id="guestCountGroup"><label for="count">NUMBER OF GUESTS</label><select id="count" name="count"><option>1</option><option>2</option><option>3</option><option>4</option></select></div><label for="message">LEAVE US A LITTLE MESSAGE ♡</label><textarea id="message" name="message" placeholder="Leave us a little message (optional)" rows="4" maxlength="500"></textarea><button type="submit" class="pill">CONFIRM MY RSVP ♡</button></form><iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP confirmation receiver" tabindex="-1" aria-hidden="true" hidden style="display:none"></iframe><p class="status" id="reply" role="status" aria-live="polite">Please review your details before confirming. ♡</p></div></div></section>
+<div class="rsvp-success" id="rsvpSuccessModal" role="dialog" aria-modal="true" aria-labelledby="rsvpSuccessTitle" aria-describedby="rsvpSuccessMessage" hidden>
+  <div class="rsvp-success-card" tabindex="-1">
+    <span class="rsvp-success-spark left" aria-hidden="true">✦</span><span class="rsvp-success-spark right" aria-hidden="true">✧</span>
+    <img class="rsvp-success-star" src="assets/dress-star.png" alt="Palm &amp; Pun wedding star">
+    <h2 class="rsvp-success-title" id="rsvpSuccessTitle">YAY! YOU'RE ON THE LIST! ♡</h2>
+    <p class="rsvp-success-message" id="rsvpSuccessMessage">Your RSVP has been received.</p>
+    <p class="rsvp-success-name" id="rsvpSuccessName"></p>
+    <button type="button" class="rsvp-success-close" id="rsvpSuccessClose">BACK TO INVITATION ↑</button>
+  </div>
+</div>
 <section class="section closing" id="closing"><div class="wrap fade"><img src="assets/closing-calendar-star.png" loading="lazy" alt="Blue star calendar marking 28 November"><h2 class="title closing-headline"><span class="closing-desktop"><span>SEE YOU AT</span><span>OUR LITTLE BIG PARTY!</span></span></h2><p class="sub">With love,<br><b>PALM & PUN</b></p><a class="pill secondary" href="#home">BACK TO TOP ↑</a></div></section><footer class="footer">PALM & PUN · 28 NOVEMBER 2026 · MADE WITH LOVE ✦</footer>
 <script>const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.fade').forEach(el=>observer.observe(el));const attendanceSelect=document.querySelector('#attendance');const guestCountGroup=document.querySelector('#guestCountGroup');const guestCountSelect=document.querySelector('#count');function updateGuestCountVisibility(){const isComing=attendanceSelect.value==='yes';guestCountGroup.hidden=!isComing;guestCountSelect.disabled=!isComing;}attendanceSelect.addEventListener('change',updateGuestCountVisibility);updateGuestCountVisibility();const RSVP_ENDPOINT='https://script.google.com/macros/s/AKfycbwYtnoGV9Ag_a4daHIZbW-RThSJpNKerFozk4qI1I5QWno2HAhS84R5wniQNaeHkjtP/exec';
 const rsvpForm=document.querySelector('#rsvpForm');
 const rsvpFrame=document.querySelector('#rsvpResponseFrame');
 const rsvpReply=document.querySelector('#reply');
 const rsvpSubmit=rsvpForm.querySelector('button[type="submit"]');
+const rsvpSuccessModal=document.querySelector('#rsvpSuccessModal');
+const rsvpSuccessTitle=document.querySelector('#rsvpSuccessTitle');
+const rsvpSuccessMessage=document.querySelector('#rsvpSuccessMessage');
+const rsvpSuccessName=document.querySelector('#rsvpSuccessName');
+const rsvpSuccessClose=document.querySelector('#rsvpSuccessClose');
+let lastRsvpFocus=null;
+function showRsvpSuccess(name,isComing){
+  lastRsvpFocus=document.activeElement;
+  rsvpSuccessTitle.textContent=isComing ? "YAY! YOU'RE ON THE LIST! ♡" : 'THANK YOU FOR LETTING US KNOW ♡';
+  rsvpSuccessMessage.textContent=isComing ? "Your RSVP has been received. We can't wait to celebrate with you!" : "We've received your RSVP. We'll miss you at the party!";
+  rsvpSuccessName.textContent=name ? 'Thank you, '+name+'! ♡' : '';
+  rsvpSuccessModal.hidden=false;
+  document.body.classList.add('rsvp-modal-open');
+  rsvpSuccessClose.focus();
+}
+function closeRsvpSuccess(){
+  rsvpSuccessModal.hidden=true;
+  document.body.classList.remove('rsvp-modal-open');
+  if(lastRsvpFocus && lastRsvpFocus.isConnected)lastRsvpFocus.focus();
+}
+rsvpSuccessClose.addEventListener('click',closeRsvpSuccess);
+rsvpSuccessModal.addEventListener('click',e=>{if(e.target===rsvpSuccessModal)closeRsvpSuccess()});
+rsvpSuccessModal.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();closeRsvpSuccess();}
+  if(e.key==='Tab'){e.preventDefault();rsvpSuccessClose.focus();}
+});
+
 let rsvpPending=null;
 let pendingSubmissionId=null;
 function makeSubmissionId(){
@@ -102,7 +158,10 @@ window.addEventListener('message',event=>{
   if(!data || data.type!=='PALM_PUN_RSVP_RESULT' || data.submissionId!==rsvpPending.id)return;
   // HTMLService can nest iframes; token and origin are checked above.
   if(data.success===true){
-    finishRsvp(true,'Thank you! Your RSVP has been saved. See you at our little big party! ♡');
+    const confirmedName=document.querySelector('#guest').value.trim();
+    const confirmedAttendance=attendanceSelect.value==='yes';
+    finishRsvp(true,'Your RSVP has been received. ♡');
+    showRsvpSuccess(confirmedName,confirmedAttendance);
   }else{
     finishRsvp(false,'We could not confirm your RSVP. Please try again or contact us.');
   }
