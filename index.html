@@ -69,6 +69,17 @@ body.rsvp-modal-open{overflow:hidden}
 @keyframes rsvpSparkle{to{opacity:.35;transform:scale(.68) rotate(20deg)}}
 @media (prefers-reduced-motion:reduce){.rsvp-success-card,.rsvp-success-star,.rsvp-success-spark{animation:none!important}}
 
+
+/* V5.9: celebratory reveal when the server confirms the RSVP. */
+.rsvp-success{background:rgba(24,10,24,.82);z-index:9999;isolation:isolate}
+.rsvp-success-card{width:min(100%,460px);padding:35px 22px 32px;box-shadow:0 30px 95px rgba(10,2,16,.6)}
+.rsvp-success-star{width:min(68%,255px);max-height:260px;margin:4px auto 10px;filter:drop-shadow(0 12px 22px rgba(15,5,25,.36));animation:rsvpStarBigPop 1.25s cubic-bezier(.18,.78,.22,1) both}
+.rsvp-success-card .rsvp-success-spark{font-size:37px;animation:rsvpSparkBurst 1.5s ease-in-out infinite alternate}
+.rsvp-success-title{margin-top:10px}
+.rsvp-success[data-celebrate="true"] .rsvp-success-card{animation:rsvpCardPop .45s ease-out both}
+@keyframes rsvpStarBigPop{0%{opacity:0;transform:translateY(110px) scale(.12) rotate(-24deg)}50%{opacity:1;transform:translateY(-24px) scale(1.28) rotate(8deg)}72%{transform:translateY(9px) scale(.91) rotate(-4deg)}88%{transform:translateY(-9px) scale(1.1) rotate(3deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes rsvpSparkBurst{0%{opacity:.15;transform:scale(.4) rotate(-25deg)}55%{opacity:1;transform:scale(1.3) rotate(12deg)}100%{opacity:.65;transform:scale(.87) rotate(35deg)}}
+@media(prefers-reduced-motion:reduce){.rsvp-success-star,.rsvp-success-card,.rsvp-success-spark{animation:none!important;opacity:1!important;transform:none!important}}
 </style></head><body><a class="skip" href="#details">Skip invitation</a>
 <section class="hero" id="home"><div class="walk-zone" aria-hidden="true"><img class="walking-stars" id="walkingStars" src="assets/run-0.png" alt=""></div><div class="cloud one"></div><div class="cloud two"></div><span class="floating-star a"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><span class="floating-star b"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><g stroke="#910c2d" stroke-width="3" stroke-linecap="round"><path d="M24 2V14 M24 34V46 M2 24H14 M34 24H46 M8 8L16 16 M32 32L40 40 M40 8L32 16 M16 32L8 40"/></g><circle cx="24" cy="24" r="5" fill="#910c2d"/></svg></span><span class="floating-star c"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><div class="hero-inner"><div class="mini">A LITTLE LOVE, A LOT OF FUN</div><img class="hero-card" tabindex="0" src="assets/invitation.jpg" alt="Official Palm and Pun wedding invitation for 28 November 2026 at Milestone Studio" fetchpriority="high"><a class="pill" href="#details">OPEN INVITATION ↓</a><span class="hint">Scroll down to discover our wedding day</span></div></section>
 <audio id="weddingMusic" preload="none" loop src="assets/wedding-violin.mp3"></audio><button id="musicButton" class="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">♫ PLAY MUSIC</button><nav aria-label="Wedding page navigation"><a href="#home">HOME</a><a href="#timeline">OUR DAY</a><a href="#dress">DRESS</a><a href="#location">MAP</a><a href="#rsvp">RSVP</a></nav>
@@ -105,11 +116,15 @@ function showRsvpSuccess(name,isComing){
   rsvpSuccessMessage.textContent=isComing ? "Your RSVP has been received. We can't wait to celebrate with you!" : "We've received your RSVP. We'll miss you at the party!";
   rsvpSuccessName.textContent=name ? 'Thank you, '+name+'! ♡' : '';
   rsvpSuccessModal.hidden=false;
+  rsvpSuccessModal.removeAttribute('data-celebrate');
+  void rsvpSuccessModal.offsetWidth;
+  rsvpSuccessModal.setAttribute('data-celebrate','true');
   document.body.classList.add('rsvp-modal-open');
   rsvpSuccessClose.focus();
 }
 function closeRsvpSuccess(){
   rsvpSuccessModal.hidden=true;
+  rsvpSuccessModal.removeAttribute('data-celebrate');
   document.body.classList.remove('rsvp-modal-open');
   if(lastRsvpFocus && lastRsvpFocus.isConnected)lastRsvpFocus.focus();
 }
@@ -184,8 +199,8 @@ rsvpForm.addEventListener('submit',event=>{
   }catch(_){rsvpReply.textContent='Please use a secure browser to submit your RSVP.';return;}
   const id=pendingSubmissionId;
   rsvpSubmit.disabled=true;
-  rsvpSubmit.textContent='SENDING…';
-  rsvpReply.textContent='Sending your RSVP securely…';
+  rsvpSubmit.textContent='SENDING… PLEASE WAIT ♡';
+  rsvpReply.textContent='Just a little moment… ♡ We’re saving your RSVP.';
   const payload={name,attendance:isComing?'Yes':'No',guests,message,submissionId:id};
   // Native form POST to a hidden iframe avoids a cross-origin fetch response issue.
   const postForm=document.createElement('form');
