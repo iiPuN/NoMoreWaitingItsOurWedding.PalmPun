@@ -70,6 +70,8 @@ body.rsvp-modal-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.rsvp-success-card,.rsvp-success-star,.rsvp-success-spark{animation:none!important}}
 
 
+/* V6.0: reliably keep overlay hidden until verified and show thank-you. */
+.rsvp-success[hidden]{display:none!important}
 /* V5.9: celebratory reveal when the server confirms the RSVP. */
 .rsvp-success{background:rgba(24,10,24,.82);z-index:9999;isolation:isolate}
 .rsvp-success-card{width:min(100%,460px);padding:35px 22px 32px;box-shadow:0 30px 95px rgba(10,2,16,.6)}
@@ -92,7 +94,7 @@ body.rsvp-modal-open{overflow:hidden}
   <div class="rsvp-success-card" tabindex="-1">
     <span class="rsvp-success-spark left" aria-hidden="true">✦</span><span class="rsvp-success-spark right" aria-hidden="true">✧</span>
     <img class="rsvp-success-star" src="assets/dress-star.png" alt="Palm &amp; Pun wedding star">
-    <h2 class="rsvp-success-title" id="rsvpSuccessTitle">YAY! YOU'RE ON THE LIST! ♡</h2>
+    <h2 class="rsvp-success-title" id="rsvpSuccessTitle">THANK YOU! ♡</h2>
     <p class="rsvp-success-message" id="rsvpSuccessMessage">Your RSVP has been received.</p>
     <p class="rsvp-success-name" id="rsvpSuccessName"></p>
     <button type="button" class="rsvp-success-close" id="rsvpSuccessClose">BACK TO INVITATION ↑</button>
@@ -112,8 +114,8 @@ const rsvpSuccessClose=document.querySelector('#rsvpSuccessClose');
 let lastRsvpFocus=null;
 function showRsvpSuccess(name,isComing){
   lastRsvpFocus=document.activeElement;
-  rsvpSuccessTitle.textContent=isComing ? "YAY! YOU'RE ON THE LIST! ♡" : 'THANK YOU FOR LETTING US KNOW ♡';
-  rsvpSuccessMessage.textContent=isComing ? "Your RSVP has been received. We can't wait to celebrate with you!" : "We've received your RSVP. We'll miss you at the party!";
+  rsvpSuccessTitle.textContent = "THANK YOU! ♡";
+  rsvpSuccessMessage.textContent=isComing ? "Your RSVP has been received. We can't wait to celebrate with you!" : "Your RSVP has been received. We'll miss you at the party!";
   rsvpSuccessName.textContent=name ? 'Thank you, '+name+'! ♡' : '';
   rsvpSuccessModal.hidden=false;
   rsvpSuccessModal.removeAttribute('data-celebrate');
@@ -168,14 +170,18 @@ function finishRsvp(success,message){
   }
 }
 window.addEventListener('message',event=>{
-  if(!rsvpPending || !isGoogleResponseOrigin(event.origin))return;
+  if(!rsvpPending)return;
+  // Apps Script HTMLService may relay through a sandboxed iframe with an
+  // opaque ("null") origin. Match the random one-time submission ID instead;
+  // unknown origins are accepted only for the expected result with this ID.
+  if(event.origin !== 'null' && !isGoogleResponseOrigin(event.origin))return;
   const data=event.data;
   if(!data || data.type!=='PALM_PUN_RSVP_RESULT' || data.submissionId!==rsvpPending.id)return;
   // HTMLService can nest iframes; token and origin are checked above.
   if(data.success===true){
     const confirmedName=document.querySelector('#guest').value.trim();
     const confirmedAttendance=attendanceSelect.value==='yes';
-    finishRsvp(true,'Your RSVP has been received. ♡');
+    finishRsvp(true,'THANK YOU! ♡ Your RSVP has been received.');
     showRsvpSuccess(confirmedName,confirmedAttendance);
   }else{
     finishRsvp(false,'We could not confirm your RSVP. Please try again or contact us.');
