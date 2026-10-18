@@ -159,6 +159,7 @@ function isGoogleResponseOrigin(origin){
 function finishRsvp(success,message){
   if(!rsvpPending)return;
   clearTimeout(rsvpPending.timer);
+  clearInterval(rsvpPending.poller);
   rsvpPending=null;
   rsvpSubmit.disabled=false;
   rsvpSubmit.textContent='CONFIRM MY RSVP ♡';
@@ -168,6 +169,30 @@ function finishRsvp(success,message){
     rsvpForm.reset();
     updateGuestCountVisibility();
   }
+}
+// Independent verification: query only the saved status of this random submission ID.
+// A JSONP script tag is used because Apps Script ContentService does not send CORS headers.
+function verifyRsvpById(id){
+  if(!rsvpPending || rsvpPending.id!==id)return;
+  const callbackName='palmPunRsvpStatus_'+id.replace(/[^a-zA-Z0-9_]/g,'');
+  const script=document.createElement('script');
+  let settled=false;
+  const cleanup=()=>{delete window[callbackName];script.remove();};
+  const timeout=setTimeout(()=>{if(!settled){settled=true;cleanup();}},6500);
+  window[callbackName]=function(result){
+    if(settled)return;
+    settled=true;clearTimeout(timeout);cleanup();
+    if(!rsvpPending || rsvpPending.id!==id)return;
+    if(result && result.submissionId===id && result.saved===true){
+      const confirmedName=document.querySelector('#guest').value.trim();
+      const confirmedAttendance=attendanceSelect.value==='yes';
+      finishRsvp(true,'THANK YOU! ♡ Your RSVP has been received.');
+      showRsvpSuccess(confirmedName,confirmedAttendance);
+    }
+  };
+  script.onerror=()=>{if(!settled){settled=true;clearTimeout(timeout);cleanup();}};
+  script.src=RSVP_ENDPOINT+'?action=status&id='+encodeURIComponent(id)+'&callback='+encodeURIComponent(callbackName)+'&t='+Date.now();
+  document.head.appendChild(script);
 }
 window.addEventListener('message',event=>{
   if(!rsvpPending)return;
@@ -220,10 +245,14 @@ rsvpForm.addEventListener('submit',event=>{
   });
   document.body.appendChild(postForm);
   const timer=setTimeout(()=>{
+    clearInterval(rsvpPending?.poller);
     finishRsvp(false,'We could not verify the response. Please check with us before trying again; the RSVP may have been saved.');
-  },20000);
-  rsvpPending={id,timer};
-  try{postForm.submit();}
+  },30000);
+  rsvpPending={id,timer,poller:null};
+  try{postForm.submit();
+    setTimeout(()=>verifyRsvpById(id),2300);
+    rsvpPending.poller=setInterval(()=>verifyRsvpById(id),6500);
+  }
   catch(_){finishRsvp(false,'Unable to send your RSVP. Please try again.');}
   finally{postForm.remove();}
 });
