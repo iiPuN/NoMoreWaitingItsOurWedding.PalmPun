@@ -57,40 +57,97 @@ html{scroll-snap-type:y proximity;scroll-padding-top:0}
 <section class="section timeline" id="timeline"><div class="wrap fade"><span class="eyebrow">HERE'S THE PLAN</span><h2 class="title">OUR WEDDING DAY</h2><p class="sub">A little ceremony, good food, lovely people, and a whole lot of fun.</p><div class="timeline-list"><div class="event"><div class="spark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true" focusable="false"><path fill="#7eb4d5" d="M24 3 C27 15 33 21 45 24 C33 27 27 33 24 45 C21 33 15 27 3 24 C15 21 21 15 24 3Z"/></svg></div><button class="event-art event-art-guests" type="button" data-sprite="guests" aria-label="Play guests arrive animation"><img src="assets/sprite-guests-0.png" loading="lazy" alt="Animated white star illustration for guests arrive"></button><div class="event-copy"><div class="time">4:00 PM</div><h3>GUESTS ARRIVE</h3></div></div><div class="event"><div class="spark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true" focusable="false"><g stroke="#7eb4d5" stroke-width="3.3" stroke-linecap="round"><path d="M24 3V13 M24 35V45 M3 24H13 M35 24H45 M9 9L16 16 M32 32L39 39 M39 9L32 16 M16 32L9 39"/></g><circle cx="24" cy="24" r="4.5" fill="#7eb4d5"/></svg></div><button class="event-art event-art-vow" type="button" data-sprite="vow" aria-label="Play vow ceremony animation"><img src="assets/sprite-vow-0.png" loading="lazy" alt="Animated white star illustration for vow ceremony"></button><div class="event-copy"><div class="time">4:30 PM</div><h3>VOW CEREMONY</h3></div></div><div class="event"><div class="spark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true" focusable="false"><path fill="#7eb4d5" d="M24 3 C27 15 33 21 45 24 C33 27 27 33 24 45 C21 33 15 27 3 24 C15 21 21 15 24 3Z"/></svg></div><button class="event-art event-art-dinner" type="button" data-sprite="dinner" aria-label="Play dinner and speeches animation"><img src="assets/sprite-dinner-0.png" loading="lazy" alt="Animated white star illustration for dinner and speeches"></button><div class="event-copy"><div class="time">6:00 PM</div><h3>DINNER + SPEECHES</h3></div></div><div class="event"><div class="spark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true" focusable="false"><g stroke="#7eb4d5" stroke-width="3.3" stroke-linecap="round"><path d="M24 3V13 M24 35V45 M3 24H13 M35 24H45 M9 9L16 16 M32 32L39 39 M39 9L32 16 M16 32L9 39"/></g><circle cx="24" cy="24" r="4.5" fill="#7eb4d5"/></svg></div><button class="event-art event-art-party" type="button" data-sprite="party" aria-label="Play party animation"><img src="assets/sprite-party-0.png" loading="lazy" alt="Animated white star illustration for party time"></button><div class="event-copy"><div class="time">7:00 PM</div><h3>NOW IT'S A PARTY!</h3></div></div></div></div></section>
 <section class="section dress" id="dress"><div class="wrap fade"><span class="eyebrow">A LITTLE NOTE</span><h2 class="title">DRESS HAPPY!</h2><img class="star-img" src="assets/dress-star.png" alt="Blue star with Palm and Pun red wedding monogram" loading="lazy"><div class="statement">COME AS YOU ARE</div><p class="sub">No dress code, just dress happy.<br>Wear whatever makes you feel like celebrating!</p><p class="dress-remark">A little note: Thinking of wearing all white?<br>Add a splash of color for us today! ♡</p></div></section>
 <section class="section venue" id="location"><div class="wrap fade"><span class="eyebrow">COME FIND US</span><h2 class="title">LOCATION</h2><div class="venue-card"><span aria-hidden="true" style="font-size:40px">✦</span><p class="sub">Here’s where we’ll celebrate together!</p><div class="venue-map"><iframe title="Palm and Pun wedding location preview" src="https://www.google.com/maps/d/embed?mid=1dzSoQIOZci9iMy1yUvM7Icn-HaUbPF4&amp;ll=13.849767444457344%2C100.62674579999998&amp;z=17" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div><p class="venue-map-note">Explore the map below, or tap the button for directions.</p><a class="pill" href="https://www.google.com/maps/d/edit?hl=en&amp;mid=1dzSoQIOZci9iMy1yUvM7Icn-HaUbPF4&amp;ll=13.849767444457344%2C100.62674579999998&amp;z=18" target="_blank" rel="noopener noreferrer">OPEN WEDDING MAP ↗</a></div></div></section>
-<section class="section rsvp" id="rsvp"><div class="wrap fade"><span class="eyebrow">WE'D LOVE TO SEE YOU</span><h2 class="title">WILL YOU JOIN US?</h2><p class="sub">Let us know you'll be there!</p><div class="rsvp-box"><form id="rsvpForm"><label for="guest">YOUR NAME</label><p class="field-hint">Tell us the name we know you by ♡</p><input id="guest" name="guest" placeholder="The name we call you" required autocomplete="name" maxlength="100"><label for="attendance">WILL YOU BE THERE?</label><select id="attendance" name="attendance" required><option value="yes">YES, I’LL BE THERE! ♡</option><option value="no">SORRY, I CAN’T MAKE IT</option></select><div id="guestCountGroup"><label for="count">NUMBER OF GUESTS</label><select id="count" name="count"><option>1</option><option>2</option><option>3</option><option>4</option></select></div><label for="message">LEAVE US A LITTLE MESSAGE ♡</label><textarea id="message" name="message" placeholder="Leave us a little message (optional)" rows="4" maxlength="500"></textarea><button type="submit" class="pill">SEND TEST RSVP</button></form><p class="status" id="reply" role="status" aria-live="polite">Test mode: after sending, verify the new row in your private Google Sheet before sharing this website.</p></div></div></section>
+<section class="section rsvp" id="rsvp"><div class="wrap fade"><span class="eyebrow">WE'D LOVE TO SEE YOU</span><h2 class="title">WILL YOU JOIN US?</h2><p class="sub">Let us know you'll be there!</p><div class="rsvp-box"><form id="rsvpForm"><label for="guest">YOUR NAME</label><p class="field-hint">Tell us the name we know you by ♡</p><input id="guest" name="guest" placeholder="The name we call you" required autocomplete="name" maxlength="100"><label for="attendance">WILL YOU BE THERE?</label><select id="attendance" name="attendance" required><option value="yes">YES, I’LL BE THERE! ♡</option><option value="no">SORRY, I CAN’T MAKE IT</option></select><div id="guestCountGroup"><label for="count">NUMBER OF GUESTS</label><select id="count" name="count"><option>1</option><option>2</option><option>3</option><option>4</option></select></div><label for="message">LEAVE US A LITTLE MESSAGE ♡</label><textarea id="message" name="message" placeholder="Leave us a little message (optional)" rows="4" maxlength="500"></textarea><button type="submit" class="pill">CONFIRM MY RSVP ♡</button></form><iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP confirmation receiver" tabindex="-1" aria-hidden="true" hidden style="display:none"></iframe><p class="status" id="reply" role="status" aria-live="polite">Please review your details before confirming. ♡</p></div></div></section>
 <section class="section closing" id="closing"><div class="wrap fade"><img src="assets/closing-calendar-star.png" loading="lazy" alt="Blue star calendar marking 28 November"><h2 class="title closing-headline"><span class="closing-desktop"><span>SEE YOU AT</span><span>OUR LITTLE BIG PARTY!</span></span></h2><p class="sub">With love,<br><b>PALM & PUN</b></p><a class="pill secondary" href="#home">BACK TO TOP ↑</a></div></section><footer class="footer">PALM & PUN · 28 NOVEMBER 2026 · MADE WITH LOVE ✦</footer>
 <script>const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.fade').forEach(el=>observer.observe(el));const attendanceSelect=document.querySelector('#attendance');const guestCountGroup=document.querySelector('#guestCountGroup');const guestCountSelect=document.querySelector('#count');function updateGuestCountVisibility(){const isComing=attendanceSelect.value==='yes';guestCountGroup.hidden=!isComing;guestCountSelect.disabled=!isComing;}attendanceSelect.addEventListener('change',updateGuestCountVisibility);updateGuestCountVisibility();const RSVP_ENDPOINT='https://script.google.com/macros/s/AKfycbwYtnoGV9Ag_a4daHIZbW-RThSJpNKerFozk4qI1I5QWno2HAhS84R5wniQNaeHkjtP/exec';
-let rsvpRequestPending=false;
-document.querySelector('#rsvpForm').addEventListener('submit',async e=>{
-  e.preventDefault();
-  if(rsvpRequestPending)return;
+const rsvpForm=document.querySelector('#rsvpForm');
+const rsvpFrame=document.querySelector('#rsvpResponseFrame');
+const rsvpReply=document.querySelector('#reply');
+const rsvpSubmit=rsvpForm.querySelector('button[type="submit"]');
+let rsvpPending=null;
+let pendingSubmissionId=null;
+function makeSubmissionId(){
+  if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();
+  const bytes=new Uint8Array(16);
+  if(window.crypto&&crypto.getRandomValues)crypto.getRandomValues(bytes);
+  else throw new Error('Secure browser required');
+  return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function isGoogleResponseOrigin(origin){
+  try{
+    const url=new URL(origin);
+    return url.protocol==='https:' && (
+      url.hostname==='script.google.com' ||
+      url.hostname==='script.googleusercontent.com' ||
+      url.hostname.endsWith('.googleusercontent.com')
+    );
+  }catch(_){return false;}
+}
+function finishRsvp(success,message){
+  if(!rsvpPending)return;
+  clearTimeout(rsvpPending.timer);
+  rsvpPending=null;
+  rsvpSubmit.disabled=false;
+  rsvpSubmit.textContent='CONFIRM MY RSVP ♡';
+  rsvpReply.textContent=message;
+  if(success){
+    pendingSubmissionId=null;
+    rsvpForm.reset();
+    updateGuestCountVisibility();
+  }
+}
+window.addEventListener('message',event=>{
+  if(!rsvpPending || !isGoogleResponseOrigin(event.origin))return;
+  const data=event.data;
+  if(!data || data.type!=='PALM_PUN_RSVP_RESULT' || data.submissionId!==rsvpPending.id)return;
+  // HTMLService can nest iframes; token and origin are checked above.
+  if(data.success===true){
+    finishRsvp(true,'Thank you! Your RSVP has been saved. See you at our little big party! ♡');
+  }else{
+    finishRsvp(false,'We could not confirm your RSVP. Please try again or contact us.');
+  }
+});
+rsvpForm.addEventListener('input',()=>{if(!rsvpPending) pendingSubmissionId=null;});
+rsvpForm.addEventListener('change',()=>{if(!rsvpPending) pendingSubmissionId=null;});
+rsvpForm.addEventListener('submit',event=>{
+  event.preventDefault();
+  if(rsvpPending)return;
   const name=document.querySelector('#guest').value.trim();
   const isComing=attendanceSelect.value==='yes';
   const guests=isComing?Number(guestCountSelect.value):0;
   const message=document.querySelector('#message').value.trim();
-  const reply=document.querySelector('#reply');
-  const submitButton=document.querySelector('#rsvpForm button[type=submit]');
-  if(!name||name.length>100||message.length>500)return;
-  rsvpRequestPending=true;
-  submitButton.disabled=true;
-  submitButton.textContent='SENDING TEST…';
-  reply.textContent='Sending test RSVP…';
-  try{
-    // Apps Script ContentService does not provide a readable cross-origin response
-    // in this simple static-site configuration. Do not claim verified success.
-    await fetch(RSVP_ENDPOINT,{
-      method:'POST',mode:'no-cors',redirect:'follow',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({name,attendance:isComing?'Yes':'No',guests,message})
-    });
-    reply.textContent='Test request dispatched. Open your private Google Sheet and check for the new row. This screen cannot confirm whether it was saved.';
-  }catch(error){
-    reply.textContent='Could not dispatch the request. Check your internet connection and try again after checking the Sheet to avoid duplicates.';
-    submitButton.disabled=false;
-    submitButton.textContent='SEND TEST RSVP';
-    rsvpRequestPending=false;
+  if(!name || name.length>100 || message.length>500 || (isComing && !(guests>=1 && guests<=4))) {
+    rsvpReply.textContent='Please check your name, guest count, and message.';
+    return;
   }
-});const music=document.querySelector('#weddingMusic');const musicButton=document.querySelector('#musicButton');music.volume=.55;musicButton.addEventListener('click',async()=>{if(!music.paused){music.pause();musicButton.textContent='♫ PLAY MUSIC';musicButton.setAttribute('aria-pressed','false');musicButton.setAttribute('aria-label','Play wedding music');return;}try{await music.play();musicButton.textContent='❚❚ PAUSE MUSIC';musicButton.setAttribute('aria-pressed','true');musicButton.setAttribute('aria-label','Pause wedding music');}catch(err){musicButton.textContent='♫ TAP TO TRY AGAIN';}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&!music.paused){music.pause();musicButton.textContent='♫ PLAY MUSIC';musicButton.setAttribute('aria-pressed','false');}});const dancer=document.querySelector('#walkingStars');let frame=0;let walkerInterval;const inviteWalker=document.querySelector('#inviteWalker');let inviteFrame=0;let inviteInterval;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){walkerInterval=setInterval(()=>{frame=(frame+1)%8;dancer.src='assets/run-'+frame+'.png'},145);inviteInterval=setInterval(()=>{inviteFrame=(inviteFrame+1)%4;inviteWalker.src='assets/invite-walk-'+inviteFrame+'.png'},180);}else{dancer.src='assets/run-0.png';if(inviteWalker)inviteWalker.src='assets/invite-walk-0.png';} const weddingTimestamp=new Date('2026-11-28T16:00:00+07:00').getTime();const cdFields=[document.getElementById('countDays'),document.getElementById('countHours'),document.getElementById('countMinutes'),document.getElementById('countSeconds')];const cdComplete=document.getElementById('countComplete');function updateWeddingCountdown(){const remaining=Math.max(0,weddingTimestamp-Date.now());const totalSeconds=Math.floor(remaining/1000);const days=Math.floor(totalSeconds/86400);const hours=Math.floor(totalSeconds%86400/3600);const minutes=Math.floor(totalSeconds%3600/60);const seconds=totalSeconds%60;[days,hours,minutes,seconds].forEach((value,i)=>{cdFields[i].textContent=String(value).padStart(2,'0')});if(remaining===0){cdComplete.hidden=false;}}updateWeddingCountdown();setInterval(updateWeddingCountdown,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateWeddingCountdown();});
+  try{
+    if(!pendingSubmissionId)pendingSubmissionId=makeSubmissionId();
+  }catch(_){rsvpReply.textContent='Please use a secure browser to submit your RSVP.';return;}
+  const id=pendingSubmissionId;
+  rsvpSubmit.disabled=true;
+  rsvpSubmit.textContent='SENDING…';
+  rsvpReply.textContent='Sending your RSVP securely…';
+  const payload={name,attendance:isComing?'Yes':'No',guests,message,submissionId:id};
+  // Native form POST to a hidden iframe avoids a cross-origin fetch response issue.
+  const postForm=document.createElement('form');
+  postForm.method='POST';postForm.action=RSVP_ENDPOINT;
+  postForm.target=rsvpFrame.name;
+  postForm.style.display='none';
+  Object.entries(payload).forEach(([key,value])=>{
+    const input=document.createElement('input');
+    input.type='hidden';input.name=key;input.value=String(value);
+    postForm.appendChild(input);
+  });
+  document.body.appendChild(postForm);
+  const timer=setTimeout(()=>{
+    finishRsvp(false,'We could not verify the response. Please check with us before trying again; the RSVP may have been saved.');
+  },20000);
+  rsvpPending={id,timer};
+  try{postForm.submit();}
+  catch(_){finishRsvp(false,'Unable to send your RSVP. Please try again.');}
+  finally{postForm.remove();}
+});
+const music=document.querySelector('#weddingMusic');const musicButton=document.querySelector('#musicButton');music.volume=.55;musicButton.addEventListener('click',async()=>{if(!music.paused){music.pause();musicButton.textContent='♫ PLAY MUSIC';musicButton.setAttribute('aria-pressed','false');musicButton.setAttribute('aria-label','Play wedding music');return;}try{await music.play();musicButton.textContent='❚❚ PAUSE MUSIC';musicButton.setAttribute('aria-pressed','true');musicButton.setAttribute('aria-label','Pause wedding music');}catch(err){musicButton.textContent='♫ TAP TO TRY AGAIN';}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&!music.paused){music.pause();musicButton.textContent='♫ PLAY MUSIC';musicButton.setAttribute('aria-pressed','false');}});const dancer=document.querySelector('#walkingStars');let frame=0;let walkerInterval;const inviteWalker=document.querySelector('#inviteWalker');let inviteFrame=0;let inviteInterval;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){walkerInterval=setInterval(()=>{frame=(frame+1)%8;dancer.src='assets/run-'+frame+'.png'},145);inviteInterval=setInterval(()=>{inviteFrame=(inviteFrame+1)%4;inviteWalker.src='assets/invite-walk-'+inviteFrame+'.png'},180);}else{dancer.src='assets/run-0.png';if(inviteWalker)inviteWalker.src='assets/invite-walk-0.png';} const weddingTimestamp=new Date('2026-11-28T16:00:00+07:00').getTime();const cdFields=[document.getElementById('countDays'),document.getElementById('countHours'),document.getElementById('countMinutes'),document.getElementById('countSeconds')];const cdComplete=document.getElementById('countComplete');function updateWeddingCountdown(){const remaining=Math.max(0,weddingTimestamp-Date.now());const totalSeconds=Math.floor(remaining/1000);const days=Math.floor(totalSeconds/86400);const hours=Math.floor(totalSeconds%86400/3600);const minutes=Math.floor(totalSeconds%3600/60);const seconds=totalSeconds%60;[days,hours,minutes,seconds].forEach((value,i)=>{cdFields[i].textContent=String(value).padStart(2,'0')});if(remaining===0){cdComplete.hidden=false;}}updateWeddingCountdown();setInterval(updateWeddingCountdown,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateWeddingCountdown();});
 const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const timelineSprites={
   guests:['assets/sprite-guests-0.png','assets/sprite-guests-1.png','assets/sprite-guests-2.png','assets/sprite-guests-3.png'],
