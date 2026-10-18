@@ -43,6 +43,13 @@ html{scroll-snap-type:y proximity;scroll-padding-top:0}
  .timeline .timeline-list{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
+
+/* Closing star: gentle, accessible motion */
+.closing img{animation:closingStarFloat 4.6s ease-in-out infinite;transform-origin:center;will-change:transform}
+.closing img:hover{animation:closingStarWave 1.3s ease-in-out infinite}
+@keyframes closingStarFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-13px) rotate(2deg)}}
+@keyframes closingStarWave{0%,100%{transform:translateY(0) rotate(-3deg)}35%{transform:translateY(-10px) rotate(4deg)}70%{transform:translateY(-5px) rotate(-1deg)}}
+@media(prefers-reduced-motion:reduce){.closing img,.closing img:hover{animation:none!important;transform:none!important}}
 </style></head><body><a class="skip" href="#details">Skip invitation</a>
 <section class="hero" id="home"><div class="walk-zone" aria-hidden="true"><img class="walking-stars" id="walkingStars" src="assets/run-0.png" alt=""></div><div class="cloud one"></div><div class="cloud two"></div><span class="floating-star a"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><span class="floating-star b"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><g stroke="#910c2d" stroke-width="3" stroke-linecap="round"><path d="M24 2V14 M24 34V46 M2 24H14 M34 24H46 M8 8L16 16 M32 32L40 40 M40 8L32 16 M16 32L8 40"/></g><circle cx="24" cy="24" r="5" fill="#910c2d"/></svg></span><span class="floating-star c"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><div class="hero-inner"><div class="mini">A LITTLE LOVE, A LOT OF FUN</div><img class="hero-card" tabindex="0" src="assets/invitation.jpg" alt="Official Palm and Pun wedding invitation for 28 November 2026 at Milestone Studio" fetchpriority="high"><a class="pill" href="#details">OPEN INVITATION ↓</a><span class="hint">Scroll down to discover our wedding day</span></div></section>
 <audio id="weddingMusic" preload="none" loop src="assets/wedding-violin.mp3"></audio><button id="musicButton" class="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">♫ PLAY MUSIC</button><nav aria-label="Wedding page navigation"><a href="#home">HOME</a><a href="#timeline">OUR DAY</a><a href="#dress">DRESS</a><a href="#location">MAP</a><a href="#rsvp">RSVP</a></nav>
