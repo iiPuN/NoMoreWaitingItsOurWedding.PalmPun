@@ -6,6 +6,43 @@
 
 /* Responsive closing headline: two lines desktop, three lines mobile */
 .closing-headline{max-width:760px;margin:18px auto 22px;line-height:1.14}.closing-headline .closing-desktop{display:grid;justify-items:center;gap:.08em}.closing-headline .closing-desktop>span{display:block;white-space:nowrap}.closing-headline{font-size:clamp(17px,4.1vw,48px)}@media(max-width:600px){.closing-headline{font-size:clamp(15px,4.65vw,28px);max-width:100%;line-height:1.13}}
+
+/* V5.1: viewport-sized chapters that still grow when content needs space */
+html{scroll-snap-type:y proximity;scroll-padding-top:52px}
+.hero,.section{scroll-snap-align:start;scroll-snap-stop:normal}
+.section{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(38px,5.5svh,76px)}
+.section>.wrap{width:100%;max-width:680px}
+.details{padding-top:clamp(40px,5.5svh,64px);padding-bottom:clamp(126px,16svh,156px)}
+.details .stamp{margin-block:clamp(14px,2.4svh,24px)}
+.details .cta-row{margin-top:clamp(12px,2svh,22px)}
+.timeline .timeline-list{margin-block:clamp(14px,2.6svh,30px);gap:clamp(12px,2.5svh,22px)}
+.venue-card{margin-block:clamp(12px,2.4svh,24px);padding:clamp(16px,3svh,28px)}
+.venue-map{aspect-ratio:4/3;max-height:min(34svh,320px)}
+.rsvp-box{margin-block:clamp(12px,2.4svh,24px);padding:clamp(18px,3svh,30px) 24px}
+.closing img{width:clamp(140px,22svh,220px)}
+/* Smaller viewport: keep headings, controls and artwork readable rather than cropping */
+@media(max-height:760px){
+ .section{padding-top:34px;padding-bottom:34px}
+ .details{padding-bottom:120px}
+ .section .title{margin-block:9px 12px}
+ .section .sub{font-size:14px;line-height:1.45}
+ .details .stamp{padding:18px 18px 16px}
+ .details .facts{margin-block:12px}
+ .details .fact{padding:9px 8px}
+ .dress .star-img{width:clamp(125px,19svh,185px);margin-block:10px}
+ .dress .statement{margin-block:10px}
+ .dress-remark{margin-top:12px}
+ .venue-map{max-height:30svh}
+ .rsvp-box label{margin-top:12px}
+ .rsvp-box textarea{min-height:75px}
+}
+@media(max-height:620px){
+ .section{min-height:100svh;justify-content:flex-start}
+ .details{padding-top:28px;padding-bottom:115px}
+ .venue-map{max-height:220px}
+ .timeline .timeline-list{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-snap-type:none}}
 </style></head><body><a class="skip" href="#details">Skip invitation</a>
 <section class="hero" id="home"><div class="walk-zone" aria-hidden="true"><img class="walking-stars" id="walkingStars" src="assets/run-0.png" alt=""></div><div class="cloud one"></div><div class="cloud two"></div><span class="floating-star a"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><span class="floating-star b"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><g stroke="#910c2d" stroke-width="3" stroke-linecap="round"><path d="M24 2V14 M24 34V46 M2 24H14 M34 24H46 M8 8L16 16 M32 32L40 40 M40 8L32 16 M16 32L8 40"/></g><circle cx="24" cy="24" r="5" fill="#910c2d"/></svg></span><span class="floating-star c"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path fill="#910c2d" d="M24 3 C28 17 31 20 45 24 C31 28 28 31 24 45 C20 31 17 28 3 24 C17 20 20 17 24 3Z"/></svg></span><div class="hero-inner"><div class="mini">A LITTLE LOVE, A LOT OF FUN</div><img class="hero-card" tabindex="0" src="assets/invitation.jpg" alt="Official Palm and Pun wedding invitation for 28 November 2026 at Milestone Studio" fetchpriority="high"><a class="pill" href="#details">OPEN INVITATION ↓</a><span class="hint">Scroll down to discover our wedding day</span></div></section>
 <audio id="weddingMusic" preload="none" loop src="assets/wedding-violin.mp3"></audio><button id="musicButton" class="music-toggle" type="button" aria-pressed="false" aria-label="Play wedding music">♫ PLAY MUSIC</button><nav aria-label="Wedding page navigation"><a href="#home">HOME</a><a href="#timeline">OUR DAY</a><a href="#dress">DRESS</a><a href="#location">MAP</a><a href="#rsvp">RSVP</a></nav>
