@@ -118,7 +118,7 @@ body.rsvp-modal-open{overflow:hidden}
 .video-intro{max-width:540px;margin:0 auto 22px;line-height:1.6}
 .video-upload-card{width:min(100%,530px);margin:22px auto 0;padding:24px 20px 26px;background:#fffaf6;border:2px solid var(--red);border-radius:26px;box-shadow:0 8px 0 #910c2d12}
 .video-stars{font-size:31px;letter-spacing:9px;color:var(--red);margin-bottom:12px;animation:bob 4s ease-in-out infinite}
-.video-upload-card h3{color:var(--red);margin:0 0 10px;font-size:21px}
+.video-upload-card h3{color:var(--red);margin:0 0 10px;font-size:21px}.video-direct-link{margin:14px auto 8px;min-width:min(100%,260px);text-align:center}
 .video-setup{font-size:14px;color:#743d4d;line-height:1.6}
 .video-upload-frame{display:block;width:100%;min-height:430px;border:0;border-radius:16px;background:transparent}
 .video-upload-hint{font-size:12px;color:#703d4b;margin:12px 0 0;line-height:1.5}
@@ -149,8 +149,9 @@ body.rsvp-modal-open{overflow:hidden}
 <div class="video-upload-card">
   <div class="video-stars" aria-hidden="true">✦ ✳ ✦</div>
   <h3>YOUR VIDEO MESSAGE</h3>
-  <div id="videoUploadPending" class="video-setup">Our video guestbook is being prepared. ♡<br>Please check back soon!</div>
-  <iframe id="videoUploadFrame" class="video-upload-frame" title="Upload your private wedding video message" loading="lazy" hidden></iframe>
+  <p class="video-setup">Ready to leave us a video? Tap below to choose your clip! ♡</p>
+  <a class="pill video-direct-link" href="https://script.google.com/macros/s/AKfycbzMxDDyt4hKDihk4CX1VOoPYAWUA-885_plawldQ3yawUI2o60WaXD2tO1xleEa5N_t/exec" target="_blank" rel="noopener noreferrer" aria-label="Open video upload form in a new tab">UPLOAD YOUR VIDEO ↗</a>
+  <p class="video-upload-hint">The upload form opens in a new tab. Please keep it open until you see THANK YOU! ♡</p>
   <p class="video-upload-hint">Already sent your RSVP? No need to do it again. Video messages are optional and kept privately for Palm &amp; Pun.</p>
 </div></div></section>
 <section class="section closing" id="closing"><div class="wrap fade"><img src="assets/closing-calendar-star.png" loading="lazy" alt="Blue star calendar marking 28 November"><h2 class="title closing-headline"><span class="closing-desktop"><span>SEE YOU AT</span><span>OUR LITTLE BIG PARTY!</span></span></h2><p class="sub">With love,<br><b>PALM & PUN</b></p><a class="pill secondary" href="#home">BACK TO TOP ↑</a></div></section><footer class="footer">PALM & PUN · 28 NOVEMBER 2026 · MADE WITH LOVE ✦</footer>
@@ -385,20 +386,4 @@ document.querySelectorAll('.timeline .event-art[data-sprite]').forEach(button=>{
   attachSpriteAnimation(button,{autoLoop:true});
 });
 
-// Add the dedicated Video Guestbook Apps Script /exec URL here AFTER deploying it.
-// Keep the existing RSVP_ENDPOINT unchanged: video uploads are independent of RSVP.
-const VIDEO_UPLOAD_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzMxDDyt4hKDihk4CX1VOoPYAWUA-885_plawldQ3yawUI2o60WaXD2tO1xleEa5N_t/exec';
-(function initVideoGuestbook(){
-  const frame=document.getElementById('videoUploadFrame');
-  const pending=document.getElementById('videoUploadPending');
-  const url=VIDEO_UPLOAD_WEBAPP_URL.trim();
-  if(!url)return;
-  if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url)){
-    pending.textContent='Video guestbook setup is incomplete. Please check back soon. ♡';
-    return;
-  }
-  frame.src=url;
-  frame.hidden=false;
-  pending.hidden=true;
-})();
 </script></body></html>
